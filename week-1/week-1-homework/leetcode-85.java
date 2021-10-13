@@ -1,5 +1,5 @@
 /**
- * 題目：最大矩形
+ * 題目：最大矩形 (Hard)
  */
 class Solution {
     public int maximalRectangle(char[][] matrix) {
