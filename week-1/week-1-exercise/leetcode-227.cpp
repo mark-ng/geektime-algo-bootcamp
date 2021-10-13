@@ -25,7 +25,7 @@ public:
         s += " "; // 最後補空格防止最後數字沒有放tokens裏
         vector<string> tokens;
         string number = "";
-        bool needsZero = true;
+        bool needsZero = true; 
         for(char ch : s) {
             // 判斷是不是數字
             if(ch >= '0' && ch <= '9') {
