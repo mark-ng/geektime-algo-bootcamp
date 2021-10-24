@@ -6,37 +6,34 @@ class Solution {
     public List<Integer> permu;
     public List<List<Integer>> ans;
     public int n;
-    public HashSet<String> set;
 
     public List<List<Integer>> permuteUnique(int[] nums) {
         n = nums.length;
         taken = new boolean[n];
         permu = new ArrayList<>();
         ans = new ArrayList<>();
-        set = new HashSet<>();
-        recur(nums, 0);
+        int[] numsCopy = nums.clone();
+        Arrays.sort(numsCopy);
+        recur(numsCopy, 0);
         return ans;
     }
 
     public void recur(int[] nums, int idx) {
         if(idx == n) {
             List<Integer> copy = new ArrayList<>(permu);
-            String k = copy.toString();
-            if(!set.contains(k)) {
-                ans.add(copy);
-            }
-            set.add(k);
+            ans.add(copy);
             return;
         }
 
         for(int i = 0; i < nums.length; i++) {
-            if(!taken[i]) {
-                taken[i] = true;
-                permu.add(nums[i]);
-                recur(nums, idx + 1);
-                taken[i] = false;
-                permu.remove(permu.size() - 1);
+            if(taken[i] || (i > 0 && nums[i] == nums[i - 1] && !taken[i - 1])) {
+                continue;
             }
+            taken[i] = true;
+            permu.add(nums[i]);
+            recur(nums, idx + 1);
+            taken[i] = false;
+            permu.remove(permu.size() - 1);
         }
     }
 }
