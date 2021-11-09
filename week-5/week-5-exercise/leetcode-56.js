@@ -1,6 +1,6 @@
 /**
  * 題目： 合并区间 (Medium)
- * Method: 查分
+ * Method: 差分
  */
 /**
  * @param {number[][]} intervals
@@ -38,4 +38,44 @@ var merge = function(intervals) {
         }
     }
     return ans
+};
+/**
+ * 題目： 合并区间 (Medium)
+ * Method: 排序
+ */
+/**
+ * @param {number[][]} intervals
+ * @return {number[][]}
+ */
+ var merge = function(intervals) {
+    intervals.sort((pair1, pair2) => {
+        if (pair1[0] > pair2[0]) {
+            return 1;
+        }
+        if (pair1[0] < pair2[0]) {
+            return -1;
+        }
+        if (pair1[0] == pair2[0]) {
+            return pair1[1] - pair2[1];
+        }
+    })
+
+    let ans = [];
+    let farthest = -1;
+    let start = -1;
+    for (let i = 0; i < intervals.length; i++) {
+        let left = intervals[i][0];
+        let right = intervals[i][1];
+        if (left <= farthest) {
+            farthest = Math.max(farthest, right);
+        } else {
+            if (farthest != -1) {
+                ans.push([start, farthest]);
+            }
+            start = left
+            farthest = right;
+        }
+    }
+    ans.push([start, farthest]);
+    return ans;
 };
