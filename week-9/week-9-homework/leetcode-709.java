@@ -4,14 +4,14 @@
 
 class Solution {
     public String toLowerCase(String s) {
-        String ans = "";
+        StringBuilder sb = new StringBuilder(s.length());
         for (char c: s.toCharArray()) {
             if (c >= 'A' && c <= 'Z') {
-                ans += (char) ('a' + (c - 'A'));
+                sb.append((char) ('a' + (c - 'A')));
             } else {
-                ans += c;
+                sb.append(c);
             }
         }
-        return ans;
+        return sb.toString();
     }
 }
